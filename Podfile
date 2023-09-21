@@ -11,6 +11,7 @@ target 'secureAppTest' do
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'KakaoSDKShare'  # 메시지(카카오톡 공유)
+  pod 'IQKeyboardManagerSwift'
 
   # Pods for secureAppTest
 
