@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      function what() {
+        console.log("TESTETSETSETESTSET");
+
+        return "test";
+        //console.log("A:::::::",lonValue)
+        //console.log("B:::::::",latValue)
+      }
+    </script>
+    <script type="text/javascript">
+      function complete() {
+        return "OK";
+      }
+
+      function fillDetails() {
+        console.log("aaa");
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="sendScriptMessage()">native로 보내기!</button>
+    <script>
+      function sendScriptMessage() {
+        window.webkit.messageHandlers.HandlerName.postMessage(
+          "여기에 처리할 메시지 입력"
+        );
+      }
+    </script>
+    <div>asdasdasdas</div>
+  </body>
+</html>

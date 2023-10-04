@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko" class="hfix">
+  <head>
+    <meta charset="utf-8" />
+    <title>DataAPI</title>
+    <meta name="author" content="Kim kwangsung, Lim seonju" />
+    <meta
+      name="viewport"
+      content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,target-densitydpi=medium-dpi"
+    />
+    <meta name="keywords" content="생활안전지도,안전지도" />
+    <meta
+      name="description"
+      content="생활안전지도포털 사이트에 오신것을 환영합니다.본 페이지는 WCAG2.0,KWCAG2.0 및 미래창조과학부의 정보시스템의 구축 운영 기술 지침을 준수하여 제작하였습니다."
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=10" />
+    <script>
+      function what() {
+        init(37.439635, 127.173258);
+      }
+    </script>
+
+    <script src="/js/8open/jquery.js"></script>
+    <script src="/js/8open/jquery.easing.1.3.js"></script>
+    <script src="/js/8open/common.js"></script>
+    <script src="/js/8open/selcheck.js"></script>
+    <script src="/js/8open/jquery.slimscroll.js"></script>
+
+    <script src="/js/2dmap_new/common_new.js"></script>
+    <script src="/js/2dmap_new/jquery-1.10.2.min.js"></script>
+    <script src="/js/2dmap_new/jquery.bxslider.js"></script>
+    <script src="/js/2dmap_new/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="/js/2dmap_new/jquery.ui.datepicker-ko.js"></script>
+
+    <!-- <script src="http://www.openlayers.org/api/2.13/OpenLayers.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js"></script>
+    <script src="/js/vworld.openapi.js"></script>
+    <script src="https://map.vworld.kr/js/apis.do?type=Base&apiKey=CAAABC8F-5A97-3763-9580-B3F36F6372A1&domain=www.safemap.go.kr"></script>
+    <script>
+      var map;
+      var mapBounds = new OpenLayers.Bounds(123, 32, 134, 43);
+      var mapMinZoom = 7;
+      var mapMaxZoom = 19;
+
+      // avoid pink tiles
+      OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
+      OpenLayers.Util.onImageLoadErrorColor = "transparent";
+
+      function what() {
+        init(37.439635, 127.173258);
+      }
+
+      // 위경도 값을 EPSG:900913 표기법으로 변환해주는 식
+      function convertLatLonToWebMercator(latitude, longitude) {
+        var earthRadius = 6378137; // Earth's radius in meters
+        var x = longitude * ((earthRadius * Math.PI) / 180.0);
+        var y =
+          Math.log(Math.tan(((90 + latitude) * Math.PI) / 360.0)) /
+          (Math.PI / 180.0);
+        y = y * ((earthRadius * Math.PI) / 180.0);
+        return [x, y];
+      }
+
+      function test(lonValue, latValue) {
+        console.log("TESTETSETSETESTSET");
+        //console.log("A:::::::",lonValue)
+        //console.log("B:::::::",latValue)
+        init(lonValue, latValue);
+      }
+
+      // lonValue, latValue는 webView로 받은 좌표값
+      function init(lonValue, latValue) {
+        console.log("lonValue:::", lonValue);
+        console.log("latValue:::", latValue);
+
+        var options = {
+          controls: [],
+          projection: new OpenLayers.Projection("EPSG:900913"),
+          displayProjection: new OpenLayers.Projection("EPSG:4326"),
+          units: "m",
+          controls: [],
+          numZoomLevels: 21,
+          maxResolution: 156543.0339,
+          maxExtent: new OpenLayers.Bounds(
+            -20037508.34,
+            -20037508.34,
+            20037508.34,
+            20037508.34
+          ),
+        };
+        map = new OpenLayers.Map("basemap", options);
+
+        //배경지도 추가
+        vBase = new vworld.Layers.Base("VBASE");
+        if (vBase != null) {
+          map.addLayer(vBase);
+        }
+
+        var switcherControl = new OpenLayers.Control.LayerSwitcher();
+        map.addControl(switcherControl);
+        switcherControl.maximizeControl();
+
+        map.zoomToExtent(
+          mapBounds.transform(map.displayProjection, map.projection)
+        );
+
+        // TODO : 하드코딩 지우고 넘겨준 좌표값으로 바꾸기
+        // var lonlat = convertLatLonToWebMercator(37.439635, 127.173258);
+        // 좌표 값 들어가는 곳!
+        var lonlat = convertLatLonToWebMercator(lonValue, latValue);
+        map.panTo(new OpenLayers.LonLat(lonlat[0], lonlat[1]));
+        if ("" == "A2SM_CMMNPOI") {
+          map.zoomTo(17);
+        } else {
+          map.zoomTo(14);
+        }
+
+        map.addControl(new OpenLayers.Control.PanZoomBar());
+        map.addControl(new OpenLayers.Control.MousePosition());
+        map.addControl(new OpenLayers.Control.Navigation());
+        map.addControl(new OpenLayers.Control.Attribution({ separator: " " }));
+        addWmsLayer();
+      }
+
+      function addWmsLayer() {
+        param = {
+          name: "범죄주의구간",
+          serverUrl: "https://geo.safemap.go.kr/geoserver/safemap/wms",
+          //   serverUrl:
+          // "https://www.safemap.go.kr/openApiService/wms/getLayerData.do?serviceKey=UZMC6DX3-UZMC-UZMC-UZMC-UZMC6DX34J",
+          layername: "A2SM_CRMNLHSPOT_TOT",
+          styles: "A2SM_CrmnlHspot_Tot_Tot",
+        };
+        var wmsLayer = new OpenLayers.Layer.WMS(
+          param.name,
+          param.serverUrl,
+          {
+            layers: "" + param.layername,
+            styles: param.styles,
+            format: "image/png",
+            exceptions: "text/xml",
+            transparent: true,
+          },
+          { isBaseLayer: false }
+        );
+        map.addLayer(wmsLayer);
+
+        var wmsSource = new OpenLayers.Layer.WMS(
+          {
+            // url: "http://www.safemap.go.kr/openApiService/wms/getLayerData.do?apikey=UZMC6DX3-UZMC-UZMC-UZMC-UZMC6DX34J",
+            param: {
+              layers: "A2SM_AED",
+              tiled: true,
+              format: "image/png",
+              exceptions: "text/xml",
+              transparent: true,
+            },
+            serverType: "geoserver",
+            crossOrigin: "anonymous",
+          },
+          { isBaseLayer: false }
+        );
+
+        var wmsLayer = new OpenLayers.layer.image({
+          source: wmsSource,
+        });
+        map.addOverlay(wmsLayer);
+
+        $("#basemap").height($(window).height() - 20);
+      }
+    </script>
+    <style type="text/css">
+      /* Geoserver 에러 분홍색 이미지 표현안되도록 */
+      .olTileImage.olImageLoadError {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body onload="init()">
+    <div id="basemap" style="height: 800px"></div>
+    <script>
+      function what() {
+        init(37.439635, 127.173258);
+      }
+    </script>
+  </body>
+  <script>
+    function what() {
+      init(37.439635, 127.173258);
+    }
+  </script>
+</html>
