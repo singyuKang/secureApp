@@ -10,6 +10,9 @@ target 'secureAppTest' do
   pod 'NMapsMap'
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
+#  pod 'Firebase/Analytics'
+#  pod 'FirebaseMessaging'
+  pod 'FirebaseStorage'
   pod 'KakaoSDKShare'  # 메시지(카카오톡 공유)
   pod 'IQKeyboardManagerSwift'
 
