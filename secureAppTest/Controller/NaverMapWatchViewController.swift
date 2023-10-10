@@ -22,9 +22,6 @@ class NaverMapWatchViewController: UIViewController {
     var naverMapView = NMFMapView()
     var nmfMarkerList : [NMFMarker] = []
     var pathArray : [NMGLatLng] = []
-    
-    
-    
     var uid : String?
     
     

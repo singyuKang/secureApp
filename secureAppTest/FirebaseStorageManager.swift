@@ -11,7 +11,6 @@ import FirebaseStorage
 
 class FirebaseStorageManager {
     
-    
     static func uploadImage(image: UIImage, pathRoot: String, completion: @escaping (URL?) -> Void) {
         guard let imageData = image.jpegData(compressionQuality: 0.4) else { return }
         let metaData = StorageMetadata()

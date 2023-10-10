@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5D3157F6E17ECC61737705B2 /* Pods_secureAppTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CACF3738DCD4C7163099D403 /* Pods_secureAppTest.framework */; };
+		E91A703F2AD4E36700E125C8 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91A703E2AD4E36700E125C8 /* UIImage.swift */; };
 		E91DB4772AB8418300C227D7 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91DB4762AB8418300C227D7 /* LocationModel.swift */; };
 		E92885522AC1566E0096EF85 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92885512AC1566E0096EF85 /* NotificationViewController.swift */; };
 		E92DD5422ABA8B3500A16C94 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92DD5412ABA8B3500A16C94 /* RegisterViewController.swift */; };
@@ -40,6 +41,7 @@
 		CACF3738DCD4C7163099D403 /* Pods_secureAppTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_secureAppTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D271E59F3F64276DCC2A2050 /* Pods-secureAppTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-secureAppTest.debug.xcconfig"; path = "Target Support Files/Pods-secureAppTest/Pods-secureAppTest.debug.xcconfig"; sourceTree = "<group>"; };
 		D31AAC2D5283EAEB8D7BA926 /* Pods-secureAppTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-secureAppTest.release.xcconfig"; path = "Target Support Files/Pods-secureAppTest/Pods-secureAppTest.release.xcconfig"; sourceTree = "<group>"; };
+		E91A703E2AD4E36700E125C8 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		E91DB4762AB8418300C227D7 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		E92885512AC1566E0096EF85 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		E92DD5412ABA8B3500A16C94 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,29 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		E91A703B2AD4E2BF00E125C8 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E91A703D2AD4E2D300E125C8 /* Extension */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		E91A703D2AD4E2D300E125C8 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E91A703E2AD4E36700E125C8 /* UIImage.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		E91A70402AD5043D00E125C8 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		E99FC29C2A9874310048FB0D /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +181,8 @@
 		E9AF2EF62A974D16004154A9 /* secureAppTest */ = {
 			isa = PBXGroup;
 			children = (
+				E91A70402AD5043D00E125C8 /* Enum */,
+				E91A703B2AD4E2BF00E125C8 /* Core */,
 				E99F0F642AA6E8AE00B80089 /* map.html */,
 				E9EFC75F2AA9552000E84AE5 /* test.html */,
 				E9C319FF2AA9ADD400ED2FBE /* test2.html */,
@@ -319,6 +346,7 @@
 				E92DD5422ABA8B3500A16C94 /* RegisterViewController.swift in Sources */,
 				E94906C72AB98A1E005DAD4A /* KakaoViewController.swift in Sources */,
 				E9E4D0E32AA94CE6001DA1F5 /* WebViewController.swift in Sources */,
+				E91A703F2AD4E36700E125C8 /* UIImage.swift in Sources */,
 				E98683662AB02E3F00EB0593 /* NaverMapWatchViewController.swift in Sources */,
 				E97E86972AAE9D77004D27A0 /* NaverMapViewController.swift in Sources */,
 			);

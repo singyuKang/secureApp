@@ -99,7 +99,7 @@ class KakaoViewController: UIViewController {
      
             }else{
                 //TODO : uid 없을때 오류처리
-            
+                
             }
   
         }
