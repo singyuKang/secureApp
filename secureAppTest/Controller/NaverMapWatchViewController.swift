@@ -51,27 +51,23 @@ class NaverMapWatchViewController: UIViewController {
     func pathHistoryUpdate(){
         
     }
-    
-    
+
     func loadLocation(){
         //TODO : 방 ID로 document 변경
-        db.collection("location").document("test").addSnapshotListener{ [self](querySnapshot , error) in
+        db.collection(Constants.Firebase.COLLECTION_KEY).document(Constants.Firebase.DOCUMENT_KEY).addSnapshotListener{ [self](querySnapshot , error) in
             if let e = error {
                 print("There was in issue retrieving data from Firestore. \(e)")
             }else{
 //                print("querySnapshot:::::::", querySnapshot?.data())
                 if let dataDescription = querySnapshot?.data() {
-                    if let locationArray = dataDescription["locationArray"] as? [Dictionary<String, Any>] {
+                    if let locationArray = dataDescription[Constants.Firebase.LOCATION_ARRAY] as? [Dictionary<String, Any>] {
 //                        print("locationArray::::::;", locationArray.last)
                         for i in locationArray {
                             let NMGLatLngObject = NMGLatLng(lat: i["lat"] as! Double, lng: i["lon"] as! Double)
                             pathArray.append(NMGLatLngObject)
                         }
                         
-
-                        
                         if let myLocation = locationArray.last {
-                            
                             // List 이전꺼 지우고 새로운거 그림
                             for nmfMarker in self.nmfMarkerList {
                                 nmfMarker.mapView = nil
@@ -83,8 +79,7 @@ class NaverMapWatchViewController: UIViewController {
                         }
                         
                     }
-                    
-                    
+                
                 }
 
             }

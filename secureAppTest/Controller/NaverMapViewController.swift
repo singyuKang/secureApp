@@ -68,6 +68,11 @@ class NaverMapViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         self.locationManager.requestLocation()
+        
+        
+        
+
+        
 
 //        naverMapView.showLocationButton = true
         
@@ -88,8 +93,8 @@ class NaverMapViewController: UIViewController {
         let coor = locationManager.location?.coordinate
         lat = coor?.latitude
         lon = coor?.longitude
-        print("lat::::::::::", lat )
-        print("lon::::::::::", lon )
+//        print("lat::::::::::", lat )
+//        print("lon::::::::::", lon )
         updateMyLocation(lat ?? 0, lon ?? 0)
         
     }
@@ -99,24 +104,24 @@ class NaverMapViewController: UIViewController {
         // TODO ::::  방 처음 생성시 문서추가 해줘야됨 locationArray 필수 컬랙션 없을떄 addDocument 있을때는 getDocument
         if let uid = uid {
             
-            let test = db.collection("location").document(uid)
-            test.getDocument { (document, error) in
+            let uidDocument = db.collection(Constants.Firebase.COLLECTION_KEY).document(uid)
+            uidDocument.getDocument { (document, error) in
                 if let document = document, document.exists {
                     if let dataDescription = document.data() {
                         print("dataDescription::::::", dataDescription)
-                        if let locationArray = dataDescription["locationArray"] as? [Dictionary<String, Any>] {
+                        if let locationArray = dataDescription[Constants.Firebase.LOCATION_ARRAY] as? [Dictionary<String, Any>] {
                             //locationArray 존재 TODO 기존배열 정렬후
                             var newlocationArray = locationArray
                             newlocationArray.append(["date" : Date().timeIntervalSince1970, "lat" : lat, "lon" : lon])
-                            test.updateData(["locationArray" : newlocationArray])
+                            uidDocument.updateData([Constants.Firebase.LOCATION_ARRAY : newlocationArray])
                             
                             // List 이전꺼 지우고 새로운거 그림
                             for nmfMarker in self.nmfMarkerList {
                                 nmfMarker.mapView = nil
                             }
                             self.nmfMarkerList = []
-                            
                             self.drawMarker(lat , lon)
+                            
                         }else{
                             //TODO : locationArray 미존재 에러처리
                             
@@ -126,16 +131,10 @@ class NaverMapViewController: UIViewController {
         
                 } else {
                     print("Document does not exist")
-                    self.db.collection("location").document(uid).setData(["locationArray" : []])
                     
-//                    self.db.collection("location").addDocument(data: ["date" : Date().timeIntervalSince1970 , "lat" : lat, "lon" : lon, "locationArray" : []]){ [weak self] (error) in
-//                                if let e = error {
-//                                    print("There was an issue saving data to firestore error :::::: \(e)")
-//                                }else{
-//                                    print("Success Save Data")
-//                                    self?.drawMarker(lat ?? 0, lon ?? 0)
-//                                }
-//                            }
+                    self.db.collection(Constants.Firebase.COLLECTION_KEY).document(uid).setData([Constants.Firebase.LOCATION_ARRAY : []])
+
+                    
                 }
             }
         }else{
@@ -149,7 +148,7 @@ class NaverMapViewController: UIViewController {
     
     func drawMarker(_ lat : Double, _ lon : Double){
         
-        storage.reference(forURL: "gs://app-e78d7.appspot.com/password").downloadURL { (url, error) in
+        storage.reference(forURL: Constants.Firebase.STORAGE_URL).downloadURL { (url, error) in
             if let error = error {
                 print("downloadImage error::::", error)
             }else{
@@ -161,7 +160,7 @@ class NaverMapViewController: UIViewController {
                     
                     if let nmfImage = UIImage(data: imageData)?.resize(targetSize: CGSize(width: 75, height: 75))?.withRoundedCorners(radius: 30){
                         
-                        marker.iconImage = NMFOverlayImage(image: nmfImage )
+                        marker.iconImage = NMFOverlayImage(image: nmfImage)
                         marker.position = NMGLatLng(lat: lat, lng: lon)
                         
                         //TODO : 유저정보 업데이트
@@ -170,9 +169,8 @@ class NaverMapViewController: UIViewController {
                         DispatchQueue.main.async {
                             // code
                             marker.mapView = self.naverMapView
-                            
-                            print("lat::::::::::", lat )
-                            print("lon::::::::::", lon )
+//                            print("lat::::::::::", lat )
+//                            print("lon::::::::::", lon )
                             
                             let defaultCameraPosition = NMFCameraPosition(NMGLatLng(lat: lat, lng: lon), zoom: 15, tilt: 0, heading: 0)
                             self.naverMapView.moveCamera(NMFCameraUpdate(position: defaultCameraPosition))
@@ -195,7 +193,6 @@ class NaverMapViewController: UIViewController {
 }
 
 //MARK - CLLocationManagerDelegate
-
 extension NaverMapViewController : CLLocationManagerDelegate {
     func getLocationUsagePermission() {
           //location4
@@ -222,7 +219,7 @@ extension NaverMapViewController : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
          print("error:: \(error.localizedDescription)")
-        
+         
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

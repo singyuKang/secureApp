@@ -19,9 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //launchScreen에서 작업할 내용
         
         UNUserNotificationCenter.current().delegate = self
-        NMFAuthManager.shared().clientId = "vbbb1u6hk5"
+        NMFAuthManager.shared().clientId = Constants.CLIENT_ID
         
-        KakaoSDK.initSDK(appKey: "27eee38f87e06c631291470021c6af19")
+        KakaoSDK.initSDK(appKey: Constants.KAKAO_APP_KEY)
         
         FirebaseApp.configure()
         

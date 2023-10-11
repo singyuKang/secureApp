@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 class LoadingIndicator {
     static func showLoading() {
         DispatchQueue.main.async {
@@ -23,7 +22,7 @@ class LoadingIndicator {
                 loadingIndicatorView.frame = window.frame
                 window.addSubview(loadingIndicatorView)
             }
-
+            
             loadingIndicatorView.startAnimating()
         }
     }

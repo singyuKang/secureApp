@@ -13,3 +13,4 @@ struct LocationModel : Codable {
     let lat : Double
     let lon : Double
 }
+ 
