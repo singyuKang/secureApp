@@ -13,7 +13,6 @@ import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         //launchScreen에서 작업할 내용
@@ -30,12 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
-        
         // TODO. 스플래시 딜레이 1초
         Thread.sleep(forTimeInterval: 1.0)
         
         return true
-        
         
         
     }
@@ -64,6 +61,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) {
       print("AppDelegate didReceiveRemoteNotification userInfo :::::::::::", userInfo)
     }
+    
+    //kakao Login
+//    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+//        if (AuthApi.isKakaoTalkLoginUrl(url)) {
+//            return AuthController.handleOpenUrl(url: url)
+//        }
+//
+//        return false
+//    }
+//
+    
     
 }
 

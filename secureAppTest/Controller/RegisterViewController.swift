@@ -10,15 +10,13 @@ import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
 
-
+// 이메일 자동저장 , 딥링크 값 저장 로그인 검사 있으면 그 화면이동 ,
 class RegisterViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    
     @IBAction func registerPressed(_ sender: UIButton) {
-        
         if let email = emailTextField.text, let password = passwordTextField.text {
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 
@@ -30,11 +28,11 @@ class RegisterViewController: UIViewController {
                     self.performSegue(withIdentifier: "registerToMain", sender: self)
                 }
             }
+            
         }else{
             print("fill the blank")
         }
-        
-        
+    
     }
     
     
@@ -43,20 +41,6 @@ class RegisterViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
-
-    /*
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    
-    
-    
     
     
 }

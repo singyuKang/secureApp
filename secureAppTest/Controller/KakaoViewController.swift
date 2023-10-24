@@ -65,7 +65,7 @@ class KakaoViewController: UIViewController {
                 
                 // Content는 이제 사진과 함께 글들이 적혀있다.
                 let content = Content(title: "타이틀 문구",
-                                      imageUrl: URL(string:"http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png")!,
+                                      imageUrl: URL(string: Constants.KAKAO_TITLE_PNG_URL)!,
                                       description: "#SecureAppTest",
                                       link: appLink)
                 // 템플릿에 버튼을 추가할때 아래 buttons에 배열의 형태로 넣어준다.
@@ -74,7 +74,6 @@ class KakaoViewController: UIViewController {
                 
                 //메시지 템플릿 encode
                 if let templateJsonData = (try? SdkJSONEncoder.custom.encode(template)) {
-                    
                     //생성한 메시지 템플릿 객체를 jsonObject로 변환
                     if let templateJsonObject = SdkUtils.toJsonObject(templateJsonData) {
                         ShareApi.shared.shareDefault(templateObject:templateJsonObject) {(linkResult, error) in

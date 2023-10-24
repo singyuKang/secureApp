@@ -12,6 +12,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
+import KakaoSDKCommon
 
 //방을 판 사람 Controller
 class NaverMapViewController: UIViewController {
@@ -22,14 +23,10 @@ class NaverMapViewController: UIViewController {
     
     var lat : Double?
     var lon : Double?
-    
     var uid : String?
-    
     //timer
     var timer : Timer?
-    
     var nmfMarkerList : [NMFMarker] = []
-    
     let storage = Storage.storage()
     
      
@@ -61,19 +58,13 @@ class NaverMapViewController: UIViewController {
         
         naverMapView = NMFMapView(frame: view.frame)
      
-        
         // 앱을 사용할 때만 위치 정보를 허용할 경우 호출
         self.locationManager.requestWhenInUseAuthorization()
         // 위치 정보 제공의 정확도를 설정할 수 있다.
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         self.locationManager.requestLocation()
-        
-        
-        
-
-        
-
+    
 //        naverMapView.showLocationButton = true
         
     
@@ -133,7 +124,7 @@ class NaverMapViewController: UIViewController {
                     print("Document does not exist")
                     
                     self.db.collection(Constants.Firebase.COLLECTION_KEY).document(uid).setData([Constants.Firebase.LOCATION_ARRAY : []])
-
+                    
                     
                 }
             }
@@ -174,7 +165,7 @@ class NaverMapViewController: UIViewController {
                             
                             let defaultCameraPosition = NMFCameraPosition(NMGLatLng(lat: lat, lng: lon), zoom: 15, tilt: 0, heading: 0)
                             self.naverMapView.moveCamera(NMFCameraUpdate(position: defaultCameraPosition))
-                    
+                            
                         }
        
                     }else{

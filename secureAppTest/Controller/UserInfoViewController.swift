@@ -27,8 +27,9 @@ class UserInfoViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         imagePickerController.delegate = self
+        
         // 7. pickerController 의 타입 지정
-
+        
         
     }
     
@@ -61,7 +62,6 @@ class UserInfoViewController: UIViewController {
 //        }
         downloadimage(imgview: self.imageView)
         
-        
     }
     
     
@@ -82,12 +82,10 @@ class UserInfoViewController: UIViewController {
     }
     
     func downloadimage(imgview : UIImageView){
-        storage.reference(forURL: "gs://app-e78d7.appspot.com/password").downloadURL { (url, error) in
-            
+        storage.reference(forURL: Constants.Firebase.STORAGE_URL).downloadURL { (url, error) in
             if let error = error {
                 print("downloadImage error::::", error)
             }else{
-
                 URLSession.shared.dataTask(with: url!) { (data, response, error) in
                     guard let imageData = data else { return }
                     DispatchQueue.main.async {
@@ -96,7 +94,6 @@ class UserInfoViewController: UIViewController {
                 }.resume()
             }
         }
-    
     }
 
 }

@@ -229,7 +229,7 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="textfield" translatesAutoresizingMaskIntoConstraints="NO" id="Zv0-7V-eF1">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="177"/>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="rkdtlscks123@naver.com" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jFZ-Mx-uaR">
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="rkdtlscks123@naver.com" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jFZ-Mx-uaR">
                                         <rect key="frame" x="49" y="51" width="270" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="textColor" name="BrandBlue"/>
@@ -646,11 +646,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rQx-UK-fpm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1920" y="1598"/>
+            <point key="canvasLocation" x="-1941" y="1598"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Qaz-BK-wRq"/>
+        <segue reference="sMC-2g-xbe"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="secureImage" width="112.5" height="112.5"/>

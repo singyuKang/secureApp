@@ -31,7 +31,6 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webConfiguration.userContentController.add(self, name: "test")
         
-//
 //        if let path = Bundle.main.url(forResource: "test2", withExtension: "html"){
 //            let myURLRequest:URLRequest = URLRequest(url: path)
 //            webView?.load(myURLRequest)

@@ -64,11 +64,6 @@ class RxTestViewController: UIViewController, UITableViewDataSource {
         //Alamofire Test
         getTest()
         
-        //Loading Test
-//            LoadingIndicator.showLoading()
-    //               DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-    //                   LoadingIndicator.hideLoading()
-    //               }
         
     }
     
@@ -133,7 +128,6 @@ class RxTestViewController: UIViewController, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return shownCities.count
     }
     
