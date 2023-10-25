@@ -24,28 +24,58 @@ class NaverMapWatchViewController: UIViewController {
     var pathArray : [NMGLatLng] = []
     var uid : String?
     
+    let checkBox = CheckBox()
+    let checkBoxLabel = UILabel()
+    
+    
+    @objc func didTapCheckBox(){
+        print("didTapCheckBox Checked")
+        checkBox.toggle()
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        checkBox.backgroundColor = .red
+        
         
         naverMapView = NMFMapView(frame: view.frame)
+        checkBox.frame = CGRect(x: 24, y: 150, width: 20, height: 20)
+        checkBoxLabel.frame = CGRect(x: 50, y: 150, width: 150, height: 20)
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapCheckBox))
+        checkBox.addGestureRecognizer(gesture)
+//        checkBoxLabel.addGestureRecognizer(gesture)
+        checkBoxLabel.text = "카메라 이동"
+        
+        
         view.addSubview(naverMapView)
+        view.addSubview(checkBox)
+        view.addSubview(checkBoxLabel)
         // Do any additional setup after loading the view.
         loadLocation()
+        
+//        NSLayoutConstraint.activate(
+//         [
+//             redView.topAnchor.constraint(equalTo: self.view.topAnchor),
+//             redView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+//             redView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+//             redView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+//         ])
         
         //TODO : Location 경로표시
         let pathOverlay = NMFPath()
 //                        pathOverlay.path = NMGLineString(points: [
 //                            NMGLatLng(lat: 37.57152, lng: 126.97714),
 //                            NMGLatLng(lat: 37.56607, lng: 126.98268),
-//                            NMGLatLng(lat: 37.56445, lng: 126.97707),
+//                            NMGLatLng(lat: 37.56445, lng: 126. 97707),
 //                            NMGLatLng(lat: 37.55855, lng: 126.97822)
 //                        ])
         pathOverlay.path = NMGLineString(points: pathArray)
         pathOverlay.mapView = naverMapView
-        
-  
     }
+
+    
     
     func pathHistoryUpdate(){
         
@@ -95,9 +125,13 @@ class NaverMapWatchViewController: UIViewController {
         
         print("lat::::::::::", lat )
         print("lon::::::::::", lon )
+        
+        if self.checkBox.getIsChecked() {
+            let defaultCameraPosition = NMFCameraPosition(NMGLatLng(lat: lat, lng: lon), zoom: 15, tilt: 0, heading: 0)
+            self.naverMapView.moveCamera(NMFCameraUpdate(position: defaultCameraPosition))
+        }
+        
 
-        let defaultCameraPosition = NMFCameraPosition(NMGLatLng(lat: lat, lng: lon), zoom: 15, tilt: 0, heading: 0)
-        self.naverMapView.moveCamera(NMFCameraUpdate(position: defaultCameraPosition))
     }
     
 }

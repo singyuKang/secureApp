@@ -29,8 +29,14 @@ class NaverMapViewController: UIViewController {
     var nmfMarkerList : [NMFMarker] = []
     let storage = Storage.storage()
     
-     
+    let checkBox = CheckBox()
+    let checkBoxLabel = UILabel()
     
+    @objc func didTapCheckBox(){
+        print("didTapCheckBox Checked")
+        checkBox.toggle()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
@@ -52,23 +58,29 @@ class NaverMapViewController: UIViewController {
           
         }
         
-        
         locationManager.delegate = self
         //permission request
         
         naverMapView = NMFMapView(frame: view.frame)
-     
+        checkBox.frame = CGRect(x: 24, y: 150, width: 20, height: 20)
+        checkBoxLabel.frame = CGRect(x: 50, y: 150, width: 150, height: 20)
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapCheckBox))
+        checkBox.addGestureRecognizer(gesture)
+//        checkBoxLabel.addGestureRecognizer(gesture)
+        checkBoxLabel.text = "카메라 자동 이동"
+        
         // 앱을 사용할 때만 위치 정보를 허용할 경우 호출
         self.locationManager.requestWhenInUseAuthorization()
         // 위치 정보 제공의 정확도를 설정할 수 있다.
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         self.locationManager.requestLocation()
-    
-//        naverMapView.showLocationButton = true
         
-    
+//        naverMapView.showLocationButton = true
         view.addSubview(naverMapView)
+        view.addSubview(checkBox)
+        view.addSubview(checkBoxLabel)
         
         timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(getLocation), userInfo: nil, repeats: true)
         
@@ -162,9 +174,11 @@ class NaverMapViewController: UIViewController {
                             marker.mapView = self.naverMapView
 //                            print("lat::::::::::", lat )
 //                            print("lon::::::::::", lon )
-                            
-                            let defaultCameraPosition = NMFCameraPosition(NMGLatLng(lat: lat, lng: lon), zoom: 15, tilt: 0, heading: 0)
-                            self.naverMapView.moveCamera(NMFCameraUpdate(position: defaultCameraPosition))
+                            if self.checkBox.getIsChecked() {
+                                let defaultCameraPosition = NMFCameraPosition(NMGLatLng(lat: lat, lng: lon), zoom: 15, tilt: 0, heading: 0)
+                                self.naverMapView.moveCamera(NMFCameraUpdate(position: defaultCameraPosition))
+                            }
+                        
                             
                         }
        

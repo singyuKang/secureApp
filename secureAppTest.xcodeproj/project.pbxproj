@@ -34,6 +34,7 @@
 		E9C30D412AD661D400959F86 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C30D402AD661D400959F86 /* Log.swift */; };
 		E9C31A002AA9ADD400ED2FBE /* test2.html in Resources */ = {isa = PBXBuildFile; fileRef = E9C319FF2AA9ADD400ED2FBE /* test2.html */; };
 		E9D4B3092AAAAD27001E3B8D /* test3.html in Resources */ = {isa = PBXBuildFile; fileRef = E9D4B3082AAAAD27001E3B8D /* test3.html */; };
+		E9DA0E412AE8D5B0009ED97D /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA0E402AE8D5B0009ED97D /* CheckBox.swift */; };
 		E9E4D0E32AA94CE6001DA1F5 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E4D0E22AA94CE6001DA1F5 /* WebViewController.swift */; };
 		E9EE75DE2AA6AE90001CC146 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EE75DD2AA6AE90001CC146 /* LoadingIndicator.swift */; };
 		E9EFC7602AA9552000E84AE5 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = E9EFC75F2AA9552000E84AE5 /* test.html */; };
@@ -73,6 +74,7 @@
 		E9C30D402AD661D400959F86 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		E9C319FF2AA9ADD400ED2FBE /* test2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test2.html; sourceTree = "<group>"; };
 		E9D4B3082AAAAD27001E3B8D /* test3.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test3.html; sourceTree = "<group>"; };
+		E9DA0E402AE8D5B0009ED97D /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		E9E4D0E22AA94CE6001DA1F5 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		E9EE75DD2AA6AE90001CC146 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		E9EFC75F2AA9552000E84AE5 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				E9F724852AAFF02B003092D7 /* GoogleService-Info.plist */,
 				E9EE75DD2AA6AE90001CC146 /* LoadingIndicator.swift */,
 				E9477A322AC2AB3E00D203FC /* FirebaseStorageManager.swift */,
+				E9DA0E402AE8D5B0009ED97D /* CheckBox.swift */,
 			);
 			path = secureAppTest;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				E9477A332AC2AB3E00D203FC /* FirebaseStorageManager.swift in Sources */,
 				E91789862AD91B7500569300 /* UserInfo.swift in Sources */,
 				E92DD5442ABAB84200A16C94 /* LoginViewController.swift in Sources */,
+				E9DA0E412AE8D5B0009ED97D /* CheckBox.swift in Sources */,
 				E9F79AD92A9C7B17001AA362 /* TestModel.swift in Sources */,
 				E91DB4772AB8418300C227D7 /* LocationModel.swift in Sources */,
 				E9EE75DE2AA6AE90001CC146 /* LoadingIndicator.swift in Sources */,
