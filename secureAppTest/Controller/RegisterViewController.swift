@@ -18,14 +18,17 @@ class RegisterViewController: UIViewController {
     
     @IBAction func registerPressed(_ sender: UIButton) {
         if let email = emailTextField.text, let password = passwordTextField.text {
+            LoadingIndicator.showLoading()
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 
                 if let e = error {
                     //TODO : Show Alert error description
                     print("error description ::::::::::::::",e.localizedDescription)
+                    LoadingIndicator.hideLoading()
                 }else{
                     //no error -> Navigate to the ChatViewController
                     self.performSegue(withIdentifier: "registerToMain", sender: self)
+                    LoadingIndicator.hideLoading()
                 }
             }
             

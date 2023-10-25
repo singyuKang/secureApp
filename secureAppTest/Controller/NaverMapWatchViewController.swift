@@ -35,7 +35,6 @@ class NaverMapWatchViewController: UIViewController {
         
         //TODO : Location 경로표시
         let pathOverlay = NMFPath()
-    
 //                        pathOverlay.path = NMGLineString(points: [
 //                            NMGLatLng(lat: 37.57152, lng: 126.97714),
 //                            NMGLatLng(lat: 37.56607, lng: 126.98268),

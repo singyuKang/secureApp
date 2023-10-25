@@ -15,7 +15,7 @@ import Alamofire
 class RxTestViewController: UIViewController, UITableViewDataSource {
 
     
-
+    let rtessets = "aa"
     let allCities = ["NewYork", "London", "Paris", "Osaka", "Osagu", "Seoul"]
     var shownCities = [String]()
     @IBOutlet weak var tableView: UITableView!

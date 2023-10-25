@@ -6,17 +6,13 @@
 //
 
 import Foundation
+import RealmSwift
 
-class UserInfo {
+class UserInfo : Object {
     
     @objc dynamic var name : String = ""
     @objc dynamic var uid : String = ""
     @objc dynamic var email : String = ""
     @objc dynamic var imageURL : String = ""
     
-    
-    
 }
-
-
-
