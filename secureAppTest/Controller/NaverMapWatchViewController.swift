@@ -38,7 +38,6 @@ class NaverMapWatchViewController: UIViewController {
         super.viewDidLoad()
 //        checkBox.backgroundColor = .red
         
-        
         naverMapView = NMFMapView(frame: view.frame)
         checkBox.frame = CGRect(x: 24, y: 150, width: 20, height: 20)
         checkBoxLabel.frame = CGRect(x: 50, y: 150, width: 150, height: 20)

@@ -16,3 +16,6 @@ class UserInfo : Object {
     @objc dynamic var imageURL : String = ""
     
 }
+
+
+
