@@ -18,30 +18,40 @@ class RegisterViewController: UIViewController {
     
     @IBAction func registerPressed(_ sender: UIButton) {
         if let email = emailTextField.text, let password = passwordTextField.text {
-            LoadingIndicator.showLoading()
+            DispatchQueue.main.async {
+                IndicatorView().showProgress()
+            }
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                
                 if let e = error {
                     //TODO : Show Alert error description
                     print("error description ::::::::::::::",e.localizedDescription)
-                    LoadingIndicator.hideLoading()
+                    DispatchQueue.main.async {
+                        IndicatorView().hideProgress()
+                    }
                 }else{
                     //no error -> Navigate to the ChatViewController
                     self.performSegue(withIdentifier: "registerToMain", sender: self)
-                    LoadingIndicator.hideLoading()
+                    DispatchQueue.main.async {
+                        IndicatorView().hideProgress()
+                    }
                 }
             }
             
         }else{
             print("fill the blank")
         }
-    
     }
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+        
+        
         // Do any additional setup after loading the view.
     }
     

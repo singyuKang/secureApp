@@ -39,7 +39,7 @@ class NaverMapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.isNavigationBarHidden = false
+//        navigationController?.isNavigationBarHidden = false
         
         let user = Auth.auth().currentUser
         if let user = user {
@@ -92,6 +92,8 @@ class NaverMapViewController: UIViewController {
     }
     
     
+    
+    
     @objc func getLocation() {
         let coor = locationManager.location?.coordinate
         lat = coor?.latitude
@@ -134,16 +136,14 @@ class NaverMapViewController: UIViewController {
         
                 } else {
                     print("Document does not exist")
-                    
                     self.db.collection(Constants.Firebase.COLLECTION_KEY).document(uid).setData([Constants.Firebase.LOCATION_ARRAY : []])
-                    
                     
                 }
             }
         }else{
             //TODO UID 미존재 처리
         }
-
+        
         
 //        test.updateData(setLocationArray)
         
@@ -155,7 +155,6 @@ class NaverMapViewController: UIViewController {
             if let error = error {
                 print("downloadImage error::::", error)
             }else{
-
                 URLSession.shared.dataTask(with: url!) { (data, response, error) in
                     guard let imageData = data else { return }
                     let marker = NMFMarker()
@@ -178,8 +177,6 @@ class NaverMapViewController: UIViewController {
                                 let defaultCameraPosition = NMFCameraPosition(NMGLatLng(lat: lat, lng: lon), zoom: 15, tilt: 0, heading: 0)
                                 self.naverMapView.moveCamera(NMFCameraUpdate(position: defaultCameraPosition))
                             }
-                        
-                            
                         }
        
                     }else{
@@ -189,10 +186,7 @@ class NaverMapViewController: UIViewController {
                 }.resume()
             }
         }
-        
 
-        
-        
     }
  
 }

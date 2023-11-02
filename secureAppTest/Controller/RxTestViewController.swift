@@ -21,7 +21,6 @@ class RxTestViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    
     let disposeBag = DisposeBag()
     
     //notification Center 알림
@@ -50,8 +49,8 @@ class RxTestViewController: UIViewController, UITableViewDataSource {
             self.tableView.reloadData()
           })
           .disposed(by: disposeBag)
-        
-        
+         
+          
 //        requestAuthNotification()
 //        requestSendNotification(seconds: 3)
 //        observable.subscribe(onNext: { [unowned self]  num in
@@ -76,9 +75,12 @@ class RxTestViewController: UIViewController, UITableViewDataSource {
                   headers: ["Content-Type":"application/json", "Accept":"application/json"])
         .validate()
         .responseDecodable(of: TestModel.self){ (response) in
-           print(response)
+            print("response::::::::::::::::",response)
+            
+            
+            
+            
        }
-        
         //method : 통신방식
         //parametrs : 보낼 데이터 값
         //encoding : URLEncoding
@@ -117,7 +119,6 @@ class RxTestViewController: UIViewController, UITableViewDataSource {
         let request = UNNotificationRequest(identifier: UUID().uuidString,
                                             content: content,
                                             trigger: trigger)
-            
         center.add(request) { error in
             if let error = error {
             print("Error: \(error.localizedDescription)")

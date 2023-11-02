@@ -10,27 +10,17 @@ import FirebaseAuth
 import FirebaseStorage
 
 class UserInfoViewController: UIViewController {
-
     
     @IBOutlet weak var imageView: UIImageView!
-    
     let storage = Storage.storage()
-    
-    
-     
     let imagePickerController = UIImagePickerController()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        
+        // Do any additional setup after loading the view
         imagePickerController.delegate = self
-        
+
         // 7. pickerController 의 타입 지정
-        
-        
     }
     
     

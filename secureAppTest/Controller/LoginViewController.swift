@@ -20,12 +20,16 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginPressed(_ sender: UIButton) {
         if let email = emailTextField.text, let password = passwordTextField.text {
-            LoadingIndicator.showLoading()
+            DispatchQueue.main.async {
+                IndicatorView().showProgress()
+            }
 //            [weak self] guard let strongSelf = self else { return } 는 왜 쓰는지
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let e = error {
                     print(e.localizedDescription)
-                    LoadingIndicator.hideLoading()
+                    DispatchQueue.main.async {
+                        IndicatorView().hideProgress()
+                    }
                 }else{
                     print("Login Success")
                     self.loadUserInfo()
@@ -35,10 +39,11 @@ class LoginViewController: UIViewController {
                             // 기존 유저 정보 존재 uid 없데이트
                             let user = Auth.auth().currentUser
                             if let user = user {
+                                
+                                //TODO uid update`
                                 print("userinfo first :::: ",userinfo.first)
-                     
+                                
                             }
-                            
                             
                         }else{
                             // 새로운 유저 정보 추가
@@ -52,7 +57,6 @@ class LoginViewController: UIViewController {
                                 self.saveUserInfo(userInfo: newUserInfo)
                             }
                             
-                     
                         }
                     }
                     
@@ -60,7 +64,10 @@ class LoginViewController: UIViewController {
                     self.performSegue(withIdentifier: "goToMain", sender: self)
                     
                     
-                    LoadingIndicator.hideLoading()
+                    DispatchQueue.main.async {
+                        IndicatorView().hideProgress()
+                    }
+                    
                     
                 }
               // ...
@@ -74,6 +81,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButtonItem
         
         
     }

@@ -34,25 +34,25 @@ class NotificationViewController: UIViewController {
         notiContent.title = "알림 title"
         notiContent.body = "알림 body"
         notiContent.userInfo = ["targetScene": "splash"] // 푸시 받을때 오는 데이터
-
+        
         // 알림이 trigger되는 시간 설정
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: false)
-
+        
         let request = UNNotificationRequest(
             identifier: UUID().uuidString,
             content: notiContent,
             trigger: trigger
         )
-
+        
         userNotiCenter.add(request) { (error) in
             print(#function, error)
         }
-
+        
     }
     
     
     
-    
+     
     
 
 }

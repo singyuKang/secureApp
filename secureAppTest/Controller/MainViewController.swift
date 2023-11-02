@@ -13,6 +13,9 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
 //        navigationController?.isNavigationBarHidden = true
+        let backBarButtonItem = UIBarButtonItem(title: "뒤로가기", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButtonItem
         
         
         
